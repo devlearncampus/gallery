@@ -1,0 +1,6 @@
+package com.hexagon.galleryapp.dao;
+
+
+public class MybatisGalleryDAO {
+
+}

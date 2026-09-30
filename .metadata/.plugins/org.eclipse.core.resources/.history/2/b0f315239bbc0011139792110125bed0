@@ -1,0 +1,42 @@
+package com.hexagon.galleryapp.mybatis;
+
+import java.io.IOException;
+import java.io.InputStream;
+import org.apache.ibatis.io.Resources;
+import org.apache.ibatis.session.SqlSessionFactory;
+import org.apache.ibatis.session.SqlSessionFactoryBuilder;
+
+/*
+ * mybatis의 설정 파일(mybatis-config.xml)을 읽기 위한 java class
+ * */
+public class MybatisConfig {
+	
+	/*
+ 	Mybatis 는 개발자가 직접 JDBC api 를 다루지 않고도 쿼리문에 집중할수 있도록 해주는 Database분야(Persistence 영역)의 
+ 	프레임웍이다. 따라서 앞으로 개발자가 java  코드에서 쿼리를 수행하려면 직접 PreparedStatement 를 쓰지 않고, 
+ 	Mybatis가 제공해주는 SqlSession 이라는 객체를 이용하면 된다..
+ 	그리고  SqlSession을 얻기 위해서는 SqlSession 이 모여있는 SqlSessionFactory 로부터 가져오면 된다.. 
+	*/
+	public MybatisConfig() {
+		String resource = "com/hexagon/galleryapp/mybatis/mybatis-config.xml";
+		try(InputStream inputStream = Resources.getResourceAsStream(resource)) {
+			SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
+		} catch (IOException e) {
+			e.printStackTrace();
+		} 	
+		
+	}
+	
+}
+
+
+
+
+
+
+
+
+
+
+
+

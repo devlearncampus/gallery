@@ -1,0 +1,5 @@
+package com.hexagon.galleryapp.mybatis;
+
+public class MybatisConfig {
+
+}

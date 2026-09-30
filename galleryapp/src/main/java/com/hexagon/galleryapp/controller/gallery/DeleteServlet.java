@@ -23,11 +23,12 @@ public class DeleteServlet extends HttpServlet{
 		long galleryId=Long.parseLong(request.getParameter("gid")); //pk
 		String filename = request.getParameter("filename"); //기존 파일명 
 		
-		//이미지도 삭제 
+		//이미지 삭제 
 		File file = new File("C:"+File.separator+"Users"+File.separator+"user"+File.separator+"upload"+File.separator+filename);
 		if(file.delete()) {//파일 삭제!!
 			
 			int result = galleryDAO.delete(galleryId);// DB 에서 삭제
+			
 			response.setContentType("text/html; charset=UTF-8");
 			PrintWriter out = response.getWriter();
 			

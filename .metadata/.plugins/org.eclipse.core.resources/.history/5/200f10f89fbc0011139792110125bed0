@@ -1,0 +1,6 @@
+package com.hexagon.galleryapp.dao;
+
+//DAO의 존재는 어떠한 기술을 사용하던 변함없다..즉 jdbc, mybatis, jpa 하던  DAO를 사용해야 함
+public class MybatisGalleryDAO {
+
+}

@@ -402,3 +402,9 @@
 {"logTime": "0930/014044", "session": "END"}
 {"logTime": "0930/023434", "session": "START"}
 {"logTime": "0930/023434", "level": "INFO", "location": "chrome\\browser\\sessions\\session_service_log.cc:326 EdgeLogSessionServiceMessage", "message": "SessionServiceEvent: kStart - {\r\n   \"crashed\": false,\r\n   \"type\": 0\r\n}\r\n"}
+{"logTime": "0930/082840", "session": "END"}
+{"logTime": "0930/083130", "session": "START"}
+{"logTime": "0930/083130", "level": "INFO", "location": "chrome\\browser\\sessions\\session_service_log.cc:326 EdgeLogSessionServiceMessage", "message": "SessionServiceEvent: kStart - {\r\n   \"crashed\": false,\r\n   \"type\": 0\r\n}\r\n"}
+{"logTime": "0930/084514", "session": "END"}
+{"logTime": "0930/091538", "session": "START"}
+{"logTime": "0930/091538", "level": "INFO", "location": "chrome\\browser\\sessions\\session_service_log.cc:326 EdgeLogSessionServiceMessage", "message": "SessionServiceEvent: kStart - {\r\n   \"crashed\": false,\r\n   \"type\": 0\r\n}\r\n"}

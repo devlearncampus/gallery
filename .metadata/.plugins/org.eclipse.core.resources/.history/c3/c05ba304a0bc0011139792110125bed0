@@ -1,0 +1,7 @@
+package com.hexagon.galleryapp.dao;
+
+//DAO의 존재는 어떠한 기술을 사용하던 변함없다..즉 jdbc, mybatis, jpa 하던  DAO를 사용해야 함
+//즉 기술과 상관없이 데이터베이스 계층을 처리하는 역할을 DAO라 하는 것임(애플리케이션 설계(아키텍처)에서의 역할을 의미함)
+public class MybatisGalleryDAO {
+	
+}

@@ -1365,3 +1365,23 @@
 2026-09-30 02:34:34.565: [INFO] BookmarkModelLoaded, ids_reassigned: 0
 2026-09-30 02:34:34.565: [INFO] BookmarksLoadDropped droppedNodes=0
 2026-09-30 02:34:34.565: [INFO] BookmarksSnapshot Startup total=0 bar=0 other=0 mobile=0 showBar=0 showBarNTP=1
+2026-09-30 08:28:40.662: [INFO] BookmarksSnapshot Shutdown total=0 bar=0 other=0 mobile=0 showBar=0 showBarNTP=1
+2026-09-30 08:31:30.581: [INFO] CurrentProfilePath: C:\study_workspace\javaee_workspace\.metadata\.plugins\org.eclipse.swt\EBWebView\Default
+2026-09-30 08:31:30.581: [INFO] Profiles total count: 1
+2026-09-30 08:31:30.581: [INFO] Profile: name=프로필 1 path=C:\study_workspace\javaee_workspace\.metadata\.plugins\org.eclipse.swt\EBWebView\Default lastActive=2026-09-30T01:05:26.820Z
+2026-09-30 08:31:30.581: [INFO] LastUsedProfileDir: C:\study_workspace\javaee_workspace\.metadata\.plugins\org.eclipse.swt\EBWebView\Default
+2026-09-30 08:31:30.581: [INFO] MostRecentlyActiveProfile: name=프로필 1 path=C:\study_workspace\javaee_workspace\.metadata\.plugins\org.eclipse.swt\EBWebView\Default lastActive=2026-09-30T01:05:26.820Z
+2026-09-30 08:31:30.581: [INFO] OnDoneLoading sync enabled: 0
+2026-09-30 08:31:30.581: [INFO] BookmarkModelLoaded, ids_reassigned: 0
+2026-09-30 08:31:30.581: [INFO] BookmarksLoadDropped droppedNodes=0
+2026-09-30 08:31:30.581: [INFO] BookmarksSnapshot Startup total=0 bar=0 other=0 mobile=0 showBar=0 showBarNTP=1
+2026-09-30 08:45:14.059: [INFO] BookmarksSnapshot Shutdown total=0 bar=0 other=0 mobile=0 showBar=0 showBarNTP=1
+2026-09-30 09:15:38.829: [INFO] CurrentProfilePath: C:\study_workspace\javaee_workspace\.metadata\.plugins\org.eclipse.swt\EBWebView\Default
+2026-09-30 09:15:38.829: [INFO] Profiles total count: 1
+2026-09-30 09:15:38.829: [INFO] Profile: name=프로필 1 path=C:\study_workspace\javaee_workspace\.metadata\.plugins\org.eclipse.swt\EBWebView\Default lastActive=2026-09-30T01:05:26.820Z
+2026-09-30 09:15:38.829: [INFO] LastUsedProfileDir: C:\study_workspace\javaee_workspace\.metadata\.plugins\org.eclipse.swt\EBWebView\Default
+2026-09-30 09:15:38.829: [INFO] MostRecentlyActiveProfile: name=프로필 1 path=C:\study_workspace\javaee_workspace\.metadata\.plugins\org.eclipse.swt\EBWebView\Default lastActive=2026-09-30T01:05:26.820Z
+2026-09-30 09:15:38.829: [INFO] OnDoneLoading sync enabled: 0
+2026-09-30 09:15:38.829: [INFO] BookmarkModelLoaded, ids_reassigned: 0
+2026-09-30 09:15:38.829: [INFO] BookmarksLoadDropped droppedNodes=0
+2026-09-30 09:15:38.829: [INFO] BookmarksSnapshot Startup total=0 bar=0 other=0 mobile=0 showBar=0 showBarNTP=1

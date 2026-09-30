@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.mybatis.example.BlogMapper">
+	
+	<!-- 
+	 지금까지 JDBC  연동 시 사용해왔던 JDBC 관련 코드들은 쿼리문보다 주변의 상투적코드가 더 양이 많았다..(비효율적..)
+	 따라서 Mybatis 를 이용하면 개발자가 JDBC의 상투적 코드를 작성하지 않고 오직 쿼리문에 집중할 수 있도록 도와준다..
+
+	 주의) JDBC 기술이 사라진게 아니라, mybatis가 내부적으로  JDBC 코드를 대신 작성해는 원리임..
+	 
+	 Mybatis 와 같은 기술을 가리켜 SQL Mapper라 한다.. 
+	 SQL Mapper란 SQL 문과 java의 클래스를 자동으로 매핑시켜주기 때문이다.. 
+	 -->
+	
+	<!-- 게시물 한건 넣기 -->
+	
+	<!-- 모든 게시물 가져오기  -->
+	
+	<!-- 레코드 한건 가져오기 -->
+	
+	<!-- 한건 수정하기 -->
+	
+	<!-- 한건 삭제하기 -->
+		
+</mapper>
+
+
+
+
+
+
+
+
+
