@@ -1,0 +1,64 @@
+package com.hexagon.galleryapp.controller.gallery;
+
+import java.io.IOException;
+
+import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+@WebServlet("/gallery/update")
+
+//아래의 어노테이션을 선언해야 클라이언트가 전송한 복합데이터를 받을 수 있다..즉 클라이언트가 multipart/form-data 속성으로 전송하면 
+//기존 서블릿의 request 만으로는 파라미터를 받을 수 없다..
+@MultipartConfig(
+	fileSizeThreshold = 2*1024*1024, //2MB까지는 메모리에 기억하지만, 그 초과일경우 메모리에 저장하기엔 너무 크므로 서버의 디렉토리에 임시보관하여 메모리를 대신함
+	maxFileSize = 10*1024*1024, //10MB 파일 1개당 최대 크기 제한
+	maxRequestSize = 
+)
+public class UpdateServlet extends HttpServlet{
+	
+	@Override
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		/*
+		 update  gallery  set title=?, writer=?, content=?, 
+		 original_name=?, filename=? where gallery_id=?
+		*/
+		String title 				= request.getParameter("title");
+		String writer 				= request.getParameter("writer");
+		String content 			= request.getParameter("content");
+		String originalName 	= request.getParameter("original_name");
+		String filename			= request.getParameter("filename");
+		long galleryId			= Long.parseLong(request.getParameter("gid"));
+		
+		System.out.println("title = "+title);
+		System.out.println("writer = "+writer);
+		System.out.println("content = "+content);
+		System.out.println("originalName="+originalName);
+		System.out.println("filename="+filename);
+		System.out.println("galleryId = "+galleryId);
+	}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

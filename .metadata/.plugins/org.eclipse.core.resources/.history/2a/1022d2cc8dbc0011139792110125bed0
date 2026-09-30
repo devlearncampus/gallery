@@ -1,0 +1,5 @@
+package com.hexagon.galleryapp.controller.gallery;
+
+public class DeleteServlet {
+
+}

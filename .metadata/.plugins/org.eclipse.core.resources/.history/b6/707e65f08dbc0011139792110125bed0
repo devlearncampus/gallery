@@ -1,0 +1,8 @@
+package com.hexagon.galleryapp.controller.gallery;
+
+import javax.servlet.http.HttpServlet;
+
+//삭제 요청을 처리하는 서블릿
+public class DeleteServlet extends HttpServlet{
+	
+}

@@ -1,0 +1,9 @@
+package com.hexagon.galleryapp.controller.gallery;
+
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+
+@WebServlet("/gallery/update")
+public class UpdateServlet extends HttpServlet{
+
+}

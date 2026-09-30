@@ -46,7 +46,7 @@ public class GalleryDAO {
 		Connection con=null;
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;
-		List list = new ArrayList(); //여기서  new를 해버린 이유? 레코드가 한건도 없을 경우 list는 존재해야  size 0 을 반환하므로...만일 null 로 놓으면 size() 를 못 얻어옴
+		List<Gallery> list = new ArrayList<Gallery>(); //여기서  new를 해버린 이유? 레코드가 한건도 없을 경우 list는 존재해야  size 0 을 반환하므로...만일 null 로 놓으면 size() 를 못 얻어옴
 		
 		con=pool.getConnection();
 		try {
@@ -76,7 +76,115 @@ public class GalleryDAO {
 		return list;
 	}
 	
+	//게시물 1건 가져오기 
+	public  Gallery select(long galleryId) {
+		Connection con=null;
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		Gallery gallery=null; //rs를 대신할 대체재
+		
+		con=pool.getConnection();
+		String sql="select * from gallery where gallery_id=?";
+		
+		try {
+			pstmt=con.prepareStatement(sql);
+			pstmt.setLong(1, galleryId);
+			rs = pstmt.executeQuery(); //쿼리실행 및 표반환
+			
+			//레코드가 존재할때만 Gallery 에 옮겨담자~!!
+			if(rs.next()) { //커서가 다음으로 이동시 true 를 반환하면...레코드 있다는 뜻
+				gallery = new Gallery();
+				gallery.setGalleryId(rs.getLong("gallery_id"));
+				gallery.setTitle(rs.getString("title"));
+				gallery.setWriter(rs.getString("writer"));
+				gallery.setContent(rs.getString("content"));
+				gallery.setOriginalName(rs.getString("original_name"));
+				gallery.setFilename(rs.getString("filename"));
+				gallery.setCreatedAt(rs.getObject("created_at", LocalDateTime.class));
+				gallery.setHit(rs.getLong("hit"));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			pool.release(con, pstmt, rs);
+		}
+		
+		return gallery;
+	}
+	
+	
+	//글 1건 수정하기 
+	public int update(Gallery gallery) {
+		Connection con=null;
+		PreparedStatement  pstmt=null;
+		int result=0;
+		
+		con=pool.getConnection();
+		String sql="update  gallery  set title=?, writer=?, content=?, original_name=?, filename=? where gallery_id=?";
+		try {
+			pstmt=con.prepareStatement(sql);
+			pstmt.setString(1, gallery.getTitle());
+			pstmt.setString(2, gallery.getWriter());
+			pstmt.setString(3, gallery.getContent());
+			pstmt.setString(4, gallery.getOriginalName());
+			pstmt.setString(5, gallery.getFilename());
+			pstmt.setLong(6, gallery.getGalleryId());
+			
+			result = pstmt.executeUpdate(); //DML 이므로 0일 경우 실패.. 
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			pool.release(con, pstmt);
+		}
+		
+		return result;
+	}
+	
+	//글한건 삭제 
+	public int delete(long galleryId) {
+		Connection con=null;
+		PreparedStatement pstmt=null;
+		int result=0;
+		
+		con=pool.getConnection();
+		String sql="delete from gallery where gallery_id=?";
+		try {
+			pstmt = con.prepareStatement(sql);
+			pstmt.setLong(1, galleryId);
+			result = pstmt.executeUpdate(); //DML  실행!!!
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			pool.release(con, pstmt);
+		}
+		return result;
+	}
+	
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

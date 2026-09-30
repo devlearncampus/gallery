@@ -1,0 +1,125 @@
+package com.hexagon.galleryapp.controller.gallery;
+
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.UUID;
+
+import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.Part;
+
+import com.hexagon.galleryapp.dao.GalleryDAO;
+import com.hexagon.galleryapp.dto.Gallery;
+import com.hexagon.galleryapp.util.FileManager;
+
+@WebServlet("/gallery/update")
+
+//아래의 어노테이션을 선언해야 클라이언트가 전송한 복합데이터를 받을 수 있다..즉 클라이언트가 multipart/form-data 속성으로 전송하면 
+//기존 서블릿의 request 만으로는 파라미터를 받을 수 없다..
+@MultipartConfig(
+	fileSizeThreshold = 2*1024*1024, 	//2MB까지는 메모리에 기억하지만, 그 초과일경우 메모리에 저장하기엔 너무 크므로 서버의 디렉토리에 임시보관하여 메모리를 대신함
+	maxFileSize = 10*1024*1024, 			//10MB 파일 1개당 최대 크기 제한
+	maxRequestSize = 50*1024*1024 	//파일이 여러 개일 경우 모든 파일의 합산 최대 크기 제한 
+)
+public class UpdateServlet extends HttpServlet{
+	GalleryDAO galleryDAO = new GalleryDAO();
+	
+	@Override
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		/*
+		 
+		*/
+		String title 				= request.getParameter("title");
+		String writer 				= request.getParameter("writer");
+		String content 			= request.getParameter("content");
+		String originalName 	= request.getParameter("original_name");
+		String filename			= request.getParameter("filename");
+		long galleryId			= Long.parseLong(request.getParameter("gid"));
+		
+		System.out.println("title = "+title);
+		System.out.println("writer = "+writer);
+		System.out.println("content = "+content);
+		System.out.println("originalName="+originalName);
+		System.out.println("filename="+filename);
+		System.out.println("galleryId = "+galleryId);
+		
+		Gallery gallery = new Gallery(); //Empty 상태
+		gallery.setTitle(title);
+		gallery.setWriter(writer);
+		gallery.setContent(content);
+		gallery.setOriginalName(originalName);
+		gallery.setFilename(filename);
+		gallery.setGalleryId(galleryId);
+		
+		
+		//Part 는 업로드된 파일 정보가 담겨진 객체
+		Part filePart = request.getPart(filename);
+		if(filePart !=null && filePart.getSize() >0) { //사용자가 새로운 파일을 업로드하면...
+			//위의 Gallery DTO의 값들중  original_name 과 filename 은 교체해놓아야 아래쪽 update가 새롭게 변경된 내용을 바탕으로 진행됨
+			String userFilename=FileManager.getFilenameFromHeader(filePart); //유저가 업로드한 파일명 추출!!!(헤더로 부터)
+			
+			//개발자가 원하는 파일명으로 전환
+			String newName = UUID.randomUUID().toString()+"."+FileManager.getExt(userFilename);
+			
+			
+		}
+		
+		
+		int result = galleryDAO.update(gallery);
+		
+		response.setContentType("text/html; charset=UTF-8");
+		PrintWriter out = response.getWriter();
+		
+		out.print("<script>");
+		if(result !=0) {
+			out.print("alert('수정 성공');");
+			out.print("location.href='/gallery/content.jsp?gid="+galleryId+"';"); //상세보기 페이지 요청
+		}else {
+			out.print("alert('수정 실패');");
+			out.print("history.back();");
+		}
+		out.print("</script>");
+	}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
