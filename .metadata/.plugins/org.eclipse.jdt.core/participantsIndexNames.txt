@@ -1,0 +1,15 @@
+INDEX VERSION 1.134
+C:\study_workspace\javaee_workspace\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\1583274359.index
+\model1\src\main\java
+C:\study_workspace\javaee_workspace\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\3692701444.index
+\boardapp\src\main\java
+C:\study_workspace\javaee_workspace\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\2382823238.index
+\model1\src\main\java
+C:\study_workspace\javaee_workspace\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\3686599172.index
+\model1\src\main\java
+C:\study_workspace\javaee_workspace\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\1146647792.index
+\galleryapp\src\main\java
+C:\study_workspace\javaee_workspace\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\4041798447.index
+\noticeapp\src\main\java
+C:\study_workspace\javaee_workspace\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\3560935355.index
+\noticeapp\src\main\java

@@ -1,0 +1,5 @@
+package com.hexagon.galleryapp.util;
+
+public class FileManager {
+
+}

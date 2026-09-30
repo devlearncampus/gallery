@@ -1,0 +1,44 @@
+package com.hexagon.model1.util;
+
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.Map;
+import java.util.Set;
+
+public class Test {
+
+	public static void main(String[] args) {
+		
+		Set<String> set=new HashSet();
+		
+		set.add("사과");
+		set.add("딸기");
+		set.add("바나나");
+		set.add("바나나");
+		
+		System.out.println(set.size());
+		
+		Iterator<String> it = set.iterator();
+		
+		while(it.hasNext()) {
+			System.out.println(it.next());
+		}
+		
+		for(String obj : set) {
+			System.out.println((String)obj);
+		}
+		
+		
+		Map<String, String> map = new HashMap<String, String>();
+		map.put("car1", "Benz");
+		map.put("car2", "Audi");
+		map.put("car3", "BMW");
+
+		Set s = map.entrySet();
+		for(Object key : s) {
+			System.out.println(map.get((String)key));
+		}
+	}
+
+}

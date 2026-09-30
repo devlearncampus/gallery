@@ -1,0 +1,5 @@
+package com.hexagon.model1.util;
+
+public class EmailSender {
+
+}

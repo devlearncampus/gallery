@@ -1,0 +1,74 @@
+package com.hexagon.model1.controller.admin;
+
+import java.io.IOException;
+import java.io.PrintWriter;
+
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import com.hexagon.model1.dao.AdminDAO;
+import com.hexagon.model1.dto.Admin;
+import com.hexagon.model1.util.PasswordEncoder;
+
+//로그인 인증 요청을 처리하는 서블릿
+@WebServlet("/admin/login")
+public class AuthController extends HttpServlet{
+	// 여기에 선언된 변수는 이 서블릿이 생성될때 함께 생성되므로, 단 1번만 만들어진다.
+	AdminDAO adminDAO=new AdminDAO(); 
+	
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		//클라이언트가  Post 방식으로 전송한 id, password  를 넘겨받아서,  mysql에서 조회
+		//넘어온 비밀번호는 raw 비밀번호 이므로, 이  raw 비밀번호를 다시 해시(잘께 썰어놓은 상태)화 시켜  mysql 의 비번과 비교해야 함...
+		String userId = request.getParameter("login_id");
+		String passwordHash = request.getParameter("pwd");
+		
+		System.out.println("userId is "+userId);
+		System.out.println("passwordHash is "+passwordHash); // 업무 현장에서는 비번은 로그에 출력하면 욕먹는다...
+		
+		Admin admin = new Admin(); //empty 상태임..
+		admin.setUserId(userId);
+		admin.setPasswordHash(PasswordEncoder.getHashedPassword(passwordHash));
+		
+		Admin dto=adminDAO.login(admin);
+		
+		//로그인 한 결과로 회원 정보를 담고 있는 dto 변수는 곧 doPost() 메서드의 닫는 괄호에서 죽는다..따라서 
+		//이 요청이 끝난 후, 추후 재접속하는 유저에게 마치 기억하는것처럼 속이려면, 이 dto를 session에 보관하면 된다..
+		HttpSession session=request.getSession(); //현재 요청과 관련된 세션을 얻기, 이 시점에 세션이 생성된다.. 그리고 자동으로 세션을 구분해주는 
+																	//세션ID가 발급된다..
+		
+		
+		response.setContentType("text/html; charset=UTF-8");
+		PrintWriter out = response.getWriter();
+		
+		out.print("<script>");
+		if(dto!=null) {
+			//사용자가 발견 -- 로그인 성공
+			out.print("alert('인증 성공입니다');");
+			out.print("location.href='/board/list.jsp';");
+		}else {
+			//사용자가 없다면 -- 인증 실패
+			out.print("alert('인증 실패입니다');");
+			out.print("history.back();");
+		}
+		out.print("</script>");
+	}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

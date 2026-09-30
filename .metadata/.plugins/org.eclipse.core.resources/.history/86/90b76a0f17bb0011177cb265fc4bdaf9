@@ -1,0 +1,39 @@
+package com.hexagon.galleryapp.controller.gallery;
+
+import java.io.IOException;
+
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+/*
+ * 브라우저가 톰켓에게 정적자원(html, css, image 등)을 요청하면 개발자가 정의해놓은 서블릿이 관여할 필요도 없이
+ * 톰켓 스스로가 해당 정적자원을 읽어들여  응답정보로 보내버린다..
+ *  ex)   브라우저가  http://localhost:8888/gallery/a.png 와 같은 정적 자원을 요청하면  Tomcat 이 해당 이미지를 응답 정보로 보내준다..
+
+ 하지만, 우리의 경우 Tomcat 이  upload 디렉토리를 보유하고 있지 않으므로, 자동으로 이미지를 보내주는 기능은 없다!!!
+ 해결책?)   서블릿 java 이므로 ,  tomcat 외부의  os 차원의 디렉토리를 접근할 수 있다..따라서 서블릿에서 해당 이미지를 스트림으로 읽어들여 
+                응답 정보에 담아두면,  Tomcat 이 평소처럼 웹브라우저에 해당 이미지 정보를 보내준다.. 
+ * */
+public class ImageServlet extends HttpServlet{
+	@Override
+	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+
+	}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

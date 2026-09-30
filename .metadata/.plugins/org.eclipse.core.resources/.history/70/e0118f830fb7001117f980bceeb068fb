@@ -1,0 +1,57 @@
+package com.hexagon.model1.controller.admin;
+
+import java.io.IOException;
+
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import com.hexagon.model1.dao.AdminDAO;
+import com.hexagon.model1.dto.Admin;
+import com.hexagon.model1.util.PasswordEncoder;
+
+//로그인 인증 요청을 처리하는 서블릿
+@WebServlet("/admin/login")
+public class AuthController extends HttpServlet{
+	// 여기에 선언된 변수는 이 서블릿이 생성될때 함께 생성되므로, 단 1번만 만들어진다.
+	AdminDAO adminDAO=new AdminDAO(); 
+	
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		//클라이언트가  Post 방식으로 전송한 id, password  를 넘겨받아서,  mysql에서 조회
+		//넘어온 비밀번호는 raw 비밀번호 이므로, 이  raw 비밀번호를 다시 해시(잘께 썰어놓은 상태)화 시켜  mysql 의 비번과 비교해야 함...
+		String userId = request.getParameter("login_id");
+		String passwordHash = request.getParameter("pwd");
+		
+		System.out.println("userId is "+userId);
+		System.out.println("passwordHash is "+passwordHash); // 업무 현장에서는 비번은 로그에 출력하면 욕먹는다...
+		
+		Admin admin = new Admin(); //empty 상태임..
+		admin.setUserId(userId);
+		admin.setPasswordHash(PasswordEncoder.getHashedPassword(passwordHash));
+		
+		Admin dto=adminDAO.login(admin);
+		if(dto!=null) {
+			//사용자가 발견 -- 로그인 성공
+		}else {
+			//사용자가 없다면 -- 인증 실패
+		}
+		
+	}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,18 @@
+package com.hexagon.model1.controller.admin;
+
+import java.io.IOException;
+
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+//로그인 인증 요청을 처리하는 서블릿
+@WebServlet("/admin/login")
+public class AuthController extends HttpServlet{
+
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+	}
+}

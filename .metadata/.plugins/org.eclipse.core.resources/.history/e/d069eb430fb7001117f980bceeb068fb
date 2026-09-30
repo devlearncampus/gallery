@@ -1,0 +1,104 @@
+package com.hexagon.model1.dao;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
+import com.hexagon.model1.dto.Admin;
+import com.hexagon.model1.pool.PoolManager;
+
+/*이 클래스는 오직, admin 테이블에 대한 CRUD 만을 담당하는 DAO(Data Access Object) 이다!! */
+public class AdminDAO {
+	
+	PoolManager pool=PoolManager.getInstance();
+	
+	//insert ~~~
+	public int insert(Admin admin) {
+		Connection con=null;
+		PreparedStatement pstmt=null;
+		int result=0;
+		
+		con=pool.getConnection(); //커넥션 한 개 빌려오기  
+		
+		String sql="insert into admin(user_id, password_hash, name, email) values(?,?,?,?)";
+		
+		try {
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, admin.getUserId());//DTO 에서 꺼내기
+			pstmt.setString(2, admin.getPasswordHash());
+			pstmt.setString(3, admin.getName());
+			pstmt.setString(4, admin.getEmail());
+			result = pstmt.executeUpdate(); //DML 이기 때문에...성공시 1반환, 실패 시 0 반환
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			pool.release(con, pstmt);
+		}
+		return result;
+	}
+	
+	
+	//로그인 (아이디 및 패스워드가 모두 일치하는 지 여부..)
+	//아이디와 비밀번호는 낱개로 전달받지 말고, DTO로 전달받자 
+	public ResultSet login(Admin admin) {
+		Connection con=null;
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		Admin dto=null; //ResultSet을 대신할 pure java Object POJO(Plain Old Java Object) 
+		
+		con = pool.getConnection();
+		
+		String sql="select * from admin  where user_id=? and password_hash=?";
+		
+		try {
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, admin.getUserId()); // 유저가 전송한 아이디
+			pstmt.setString(2, admin.getPasswordHash()); //유저가 전송한 비번
+			rs = pstmt.executeQuery();//select문이 수행되면서 , 표가 반환(조건이 맞을때만...)
+			
+			//rs는  finally에서 곧 닫힐 예정이므로, 이 메서드의 반환형을 ResultSet 으로 하면 안된다!!!
+			//해결책?  rs 즉 레코드 한건을 담을 수 있는 다른 대체제를 준비하여 담으면 된다...(Admin 이다!)
+			//즉 데이터베이스 분야에서의 레코드 한건은  = java 분야에서의 클래스의 인스턴스 1개와 대응됨을 이용하자!!!!
+			if(rs.next()) { //커서가 한칸 내려갔을때, true인 경우에만 Admin 의 인스턴스를 올리자!!
+				dto = new Admin();
+				dto.setAdminId(rs.getInt("admin_id")); // pk  가져와서 담기 
+				dto.setUserId(rs.getString("user_id")); // 사용자  id 담기 
+				dto.setPasswordHash(rs.getString("password_hash"));
+				dto.setName(rs.getString("name"));
+				dto.setEmail(rs.getString("email"));
+				//dto.setCreatedAt(rs.getString("created_at"));
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			pool.release(con, pstmt, rs);
+		}
+		return dto;
+		
+	}
+	
+	
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

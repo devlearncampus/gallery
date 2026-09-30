@@ -1,0 +1,23 @@
+package com.hexagon.model1.util;
+
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.Map;
+import java.util.Set;
+
+public class Test {
+
+	public static void main(String[] args) {
+		
+		
+		Map<String, String> map = new HashMap<String, String>();
+		map.put("car1", "Benz");
+		map.put("car2", "Audi");
+		map.put("car3", "BMW");
+		
+		Map<String, String> entry = map.entrySet();
+
+	}
+
+}

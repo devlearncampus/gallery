@@ -1,0 +1,35 @@
+package com.hexagon.model1.util;
+
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.Set;
+
+public class SetStudy {
+
+	public static void main(String[] args) {
+		//Collection framework 중 Set 을 학습해본다!!
+		//순서없는 집합을 말하며 과자 봉투안의 과자 연상..(반복문을 직접 돌릴수 없다)
+		
+		//모든 컬렉션 프레임웍이 그렇듯.  Set 도 오직 객체만을 다룬다..
+		//컬렉션 프레임웍에서 지원되는 api 들은 객체의 유형을 가리지 않기 때문에 넣을때 자동으로 Object로 들어가 버린다..
+		//따라서 꺼낼때도 Object로 되어 있으니, 형변환에 주의해야 한다..
+		Set set = new HashSet();
+		set.add("사과");
+		set.add("바나나");
+		set.add("딸기");
+		set.add("딸기"); //중복된 데이터는 내부적으로 equals()  메서드가 구현되어 있기 때문에 동일한 경우 넣지 않는다..(안전 장치 마련)
+		
+		System.out.println(set.size());
+		
+		//컬렉션 프레임웍에서는 순서없는 집합의 데이터들을 순서있게 만들기 위한 도구들이 준비되는데,,이중 하나가 Iterator 이다!!
+		//8이하에서는 주로 Enumeration 
+		Iterator it = set.iterator();
+		
+		
+		
+	}
+
+}
+
+
+

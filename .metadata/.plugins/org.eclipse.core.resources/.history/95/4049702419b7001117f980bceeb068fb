@@ -1,0 +1,12 @@
+package com.hexagon.model1.util;
+
+public class SetStudy {
+
+	public static void main(String[] args) {
+		//Collection framework 중 Set 을 학습해본다!!
+		//순서없는 집합을 말하며 과자 봉투안의 과자 연상..(반복문을 직접 돌릴수 없다)
+		
+		
+	}
+
+}

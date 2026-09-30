@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript">
+	function login(){
+		//유저가 입력한 컴포넌트들의 값을 백엔드 서버로 전송한다!!
+		//HTTP 프로토콜에서 전송 방식에는 여러가지가 있다..
+		//POST, GET,PUT, DELETE...
+		//이중 서버에 무언가를 입력을 위해 요청할때는 POST 방식으로 요청을 시도해야 한다..
+		
+	}
+</script>
+</head>
+<body>
+	<!-- 
+		form 태그는 서버에 전송할 폼양식 표현한 태그로써, 폼태그로 감싼 컴포넌트는 전송 대상이 될 수 있다 
+		웹상의 HTTP 전송 시 name은 전송 변수로써 역할을 수행할 수 있으며, 이때의 변수는 파라미터라
+		지칭함..	따라서 내부적으로 이런 형식으로 날아간다...
+		
+		id=zino&password=1234  , 이 형식에서 =을 기준으로 앞에서 변수 뒤에가 값 
+		&는 그리고의 의미임.. 
+	-->
+	
+	<form method="post" action="/login">
+		<div>
+			<input type="text" placeholder="Your ID.." name="id">
+		</div>	
+		<div>
+			<input type="password" placeholder="Your Password.." name="password">
+		</div>	
+		<div>
+			<!-- button 에는 디폴트 tpye submit 이므로 action 주소로 무조건 전송 -->
+			<button>로그인</button>
+			<button>회원가입</button>
+		</div>	
+	</form>
+	
+</body>
+</html>

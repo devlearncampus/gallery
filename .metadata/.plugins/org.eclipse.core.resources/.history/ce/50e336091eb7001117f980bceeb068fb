@@ -1,0 +1,12 @@
+package com.hexagon.model1.util;
+
+public class MapStudy {
+
+	public static void main(String[] args) {
+		/*
+		 컬렉션 프레임웍의 3번째 유형인  Map에 대해 학습한다
+		 객체를 모아서 처리하는 방법 중,  Map은 key-value 의 쌍으로 데이터를 관리한다...   
+		*/
+	}
+
+}

@@ -1,0 +1,6 @@
+package com.hexagon.galleryapp.util;
+
+//개발자가 파일과 관련되어 재사용 가능성이 높은 코드들을 모아놓을 파일관련 유틸 클래스 
+public class FileManager {
+
+}

@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd"
+	id="WebApp_ID" version="4.0">
+	<display-name>galleryapp</display-name>
+
+	<!-- 
+		필터는 서블릿이 요청을 처리하기 전, 후에 동작하는 공통 컴포넌트이다. 
+		특히 필터를 이용하면 모든 서블릿이 처리해야  할 인코딩 처리 등을 사전에 설정할 수 있으므로, 코드 중복을 방지할 수 있다..
+		또한 추후에는 로그인 인증 여부 체크 등을 여기서 확인할 수 도 있음..
+	 -->
+	<filter>
+		<filter-name>encodingFilter</filter-name>
+		<filter-class></filter-class>
+		<init-param>
+			<param-name></param-name>
+			<param-value></param-value>
+		</init-param>
+	</filter>	
+	<filter-mapping>
+		<filter-name>encodingFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+
+</web-app>

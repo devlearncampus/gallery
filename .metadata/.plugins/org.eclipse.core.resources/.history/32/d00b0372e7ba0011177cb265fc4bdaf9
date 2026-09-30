@@ -1,0 +1,5 @@
+package com.hexagon.galleryapp.web.filter;
+
+public class CharacterEncodingFilter {
+
+}

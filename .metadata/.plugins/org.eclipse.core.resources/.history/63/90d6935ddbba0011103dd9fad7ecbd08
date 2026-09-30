@@ -1,0 +1,5 @@
+package com.hexagon.galleryapp.dto;
+
+public class Gallery {
+
+}

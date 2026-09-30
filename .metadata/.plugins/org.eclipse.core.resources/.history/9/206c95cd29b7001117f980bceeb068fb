@@ -1,0 +1,91 @@
+package com.hexagon.model1.controller.admin;
+
+import java.io.IOException;
+import java.io.PrintWriter;
+
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import com.hexagon.model1.dao.AdminDAO;
+import com.hexagon.model1.dto.Admin;
+import com.hexagon.model1.pool.PoolManager;
+import com.hexagon.model1.util.PasswordEncoder;
+
+/*
+ * 서블릿 버전 3미만에서는 서블릿을 사용하기 위해서는 반드시 web.xml 에 매핑을 해야 했다..
+ * 하지만 서블릿 버전 3 이상부터는 @어노테이션 방식의 매핑을 지원하기 때문에 훨씬 간단함..
+ * 
+ * @어노테이션이란? 일종의 주석이지만, 어노테이션은 프로그램에서 사용되는 주석이다..
+ * */
+@WebServlet("/admin/regist")
+public class RegistController extends HttpServlet{
+	//SecureRandom secureRandom=new SecureRandom();
+	PoolManager pool=PoolManager.getInstance(); //고양이가 미리 확보해놓은 커넥션풀을 좀더 쉽게 쓰게 해주는 클래스인 PoolManger를 이용해보자..
+	AdminDAO adminDAO=new AdminDAO();
+	
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		//한글 인코딩은 이미 필터에서 처리했음..
+		String userId			= request.getParameter("user_id");
+		String password 	= request.getParameter("password");
+		String name 			= request.getParameter("name");
+		String email 			= request.getParameter("email");
+		
+		System.out.println("userId = "+userId);
+		System.out.println("password = "+PasswordEncoder.getHashedPassword(password));
+		System.out.println("name = "+name);
+		System.out.println("email = "+email);
+		
+		//insert 호출 전에, DTO 에 파라미터들을 담자!!! 넣을때는 setter 사용!!!
+		Admin admin = new Admin(); // 현재 비워진 empty  상태의 DTO 생성
+		admin.setUserId(userId);
+		admin.setPasswordHash(PasswordEncoder.getHashedPassword(password));
+		admin.setName(name);
+		admin.setEmail(email);
+		
+		int rowCount = adminDAO.insert(admin);
+		
+		response.setContentType("text/html; charset=UTF-8");
+		PrintWriter out = response.getWriter();
+		
+		//StringBuilder tag = new StringBuilder();
+		
+		out.print("<script>");
+		if(rowCount==0) {
+			out.print("alert('실패');");
+			out.print("history.back();");
+		}else {
+			out.print("alert('관리자로 등록 성공하였습니다.로그인 해주세요');");
+			out.print("location.href='/admin/loginform.jsp';");
+		}
+		out.print("</script>");
+		
+		//out.print(tag.toString()); //생성된 응답 문자열을 출력 스트림에 보관(tomcat 이 추후 응답 정보 html로 써먹음)
+	}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

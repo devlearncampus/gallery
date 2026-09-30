@@ -1,0 +1,95 @@
+package com.hexagon.model1.util;
+
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.Properties;
+
+import jakarta.mail.Authenticator;
+import jakarta.mail.Message;
+import jakarta.mail.MessagingException;
+import jakarta.mail.PasswordAuthentication;
+import jakarta.mail.Session;
+import jakarta.mail.Transport;
+import jakarta.mail.internet.InternetAddress;
+import jakarta.mail.internet.MimeMessage;
+
+public class MailSender {
+	
+
+    public static void main(String[] args) {
+        // 1. 발신자 및 수신자 정보 설정
+        final String username = "devlearncampus@gmail.com"; // 발신자 이메일
+        final String password = "aolr hkqo kzqe jxfi";   // 앱 비밀번호 (일반 비밀번호 X)
+        String recipient = "zino1187@naver.com"; // 수신자 이메일
+
+        // 2. SMTP 서버 정보 설정 (Gmail 기준)
+        Properties prop = new Properties();
+        prop.put("mail.smtp.host", "smtp.gmail.com");
+        prop.put("mail.smtp.port", "587");
+        prop.put("mail.smtp.auth", "true");
+        prop.put("mail.smtp.starttls.enable", "true"); // TLS 사용
+
+        // 3. 인증 정보를 포함한 세션 생성
+        Session session = Session.getInstance(prop, new Authenticator() {
+            @Override
+            protected PasswordAuthentication getPasswordAuthentication() {
+                return new PasswordAuthentication(username, password);
+            }
+        });
+
+        BufferedReader buffr=null;
+        StringBuilder sb = new StringBuilder();
+        
+        try {
+			buffr=new BufferedReader(new FileReader("C:/study_workspace/javaee_workspace/model1/src/main/webapp/admin/result.html"));
+			
+			String data=null;
+			while(true) {
+				data = buffr.readLine();
+				if(data==null)break;
+				data.replace("${SERVICE_NAME}", "hexagon.com");
+				data.replace("${USER_EMAIL}", "zino1187@naver.com");
+				
+				sb.append(data);
+			}
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}finally {
+			try {
+				if(buffr !=null)buffr.close();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+        
+        try {
+            // 4. 이메일 메시지 작성
+            Message message = new MimeMessage(session);
+            message.setFrom(new InternetAddress(username));
+            message.setRecipients(
+                    Message.RecipientType.TO,
+                    InternetAddress.parse(recipient)
+            );
+            
+            // 제목 및 본문 설정 (한글 깨짐 방지를 위해 UTF-8 지정)
+            message.setSubject("Java 메일 발송 테스트");
+            message.setText("안녕하세요,\n\nJava Jakarta Mail을 통해 발송된 테스트 이메일입니다.");
+
+            // HTML 형식으로 보내고 싶다면 아래 코드를 사용하세요.
+            message.setContent(sb.toString(), "text/html; charset=utf-8");
+
+            // 5. 메일 발송
+            Transport.send(message);
+
+            System.out.println("이메일이 성공적으로 발송되었습니다.");
+
+        } catch (MessagingException e) {
+            e.printStackTrace();
+            System.err.println("이메일 발송 중 오류가 발생했습니다: " + e.getMessage());
+        }
+    }
+}

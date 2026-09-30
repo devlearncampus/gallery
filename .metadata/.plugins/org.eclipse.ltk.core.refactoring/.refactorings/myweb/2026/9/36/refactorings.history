@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename package &apos;myweb&apos; to &apos;com.hexagon.myweb.test&apos;&#x0D;&#x0A;- Original project: &apos;myweb&apos;&#x0D;&#x0A;- Original element: &apos;myweb/src/main/java/myweb&apos;&#x0D;&#x0A;- Renamed element: &apos;myweb/src/main/java/com.hexagon.myweb.test&apos;&#x0D;&#x0A;- Update references to refactored element&#x0D;&#x0A;- Update textual occurrences in comments and strings" description="Rename package &apos;myweb&apos;" flags="589830" hierarchical="false" id="org.eclipse.jdt.ui.rename.package" input="/src\/main\/java&lt;myweb" name="com.hexagon.myweb.test" qualified="false" references="true" stamp="1788508116370" textual="false" version="1.0"/>
+</session>

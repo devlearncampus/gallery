@@ -1,0 +1,86 @@
+package com.hexagon.model1.controller.admin;
+
+import java.io.IOException;
+import java.io.PrintWriter;
+
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import com.hexagon.model1.dao.AdminDAO;
+import com.hexagon.model1.dto.Admin;
+import com.hexagon.model1.util.PasswordEncoder;
+
+//로그인 인증 요청을 처리하는 서블릿
+@WebServlet("/admin/login")
+public class AuthController extends HttpServlet{
+	// 여기에 선언된 변수는 이 서블릿이 생성될때 함께 생성되므로, 단 1번만 만들어진다.
+	AdminDAO adminDAO=new AdminDAO(); 
+	
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		//클라이언트가  Post 방식으로 전송한 id, password  를 넘겨받아서,  mysql에서 조회
+		//넘어온 비밀번호는 raw 비밀번호 이므로, 이  raw 비밀번호를 다시 해시(잘께 썰어놓은 상태)화 시켜  mysql 의 비번과 비교해야 함...
+		String userId = request.getParameter("login_id");
+		String passwordHash = request.getParameter("pwd");
+		
+		System.out.println("userId is "+userId);
+		System.out.println("passwordHash is "+passwordHash); // 업무 현장에서는 비번은 로그에 출력하면 욕먹는다...
+		
+		Admin admin = new Admin(); //empty 상태임..
+		admin.setUserId(userId);
+		admin.setPasswordHash(PasswordEncoder.getHashedPassword(passwordHash));
+		
+		Admin dto=adminDAO.login(admin);
+		
+		response.setContentType("text/html; charset=UTF-8");
+		PrintWriter out = response.getWriter();
+		
+		if(dto!=null) {//사용자가 발견 -- 로그인 성공
+			//로그인 한 결과로 회원 정보를 담고 있는 dto 변수는 곧 doPost() 메서드의 닫는 괄호에서 죽는다..따라서 
+			//이 요청이 끝난 후, 추후 재접속하는 유저에게 마치 기억하는것처럼 속이려면, 이 dto를 session에 보관하면 된다..
+			HttpSession session=request.getSession(); //현재 요청과 관련된 세션을 얻기, 이 시점에 세션이 생성된다.. 그리고 자동으로 세션을 구분해주는 
+			//세션ID가 발급된다..
+			String sessionId = session.getId();
+			System.out.println("이 요청에 의해 서버측에 생성된 세션의 고유 id는 "+sessionId);
+			
+			
+			//생성된 세션 객체에 개발자가 원하는 데이터 넣기!! (참고로  session 은 java.util.Map 을 구현한 객체이다)
+			/*
+			java에서 오직 객체만을 모아서 처리할때, 효율적으로 처리하기 위한 api가 지원되는데 이를 가리켜 collection framework이라 하며 java.util 에서 지원함 
+			[ 컬렉션 프레임웍의 유형 ] 
+			  1.순서있는 집합을 표현한 List 형 (배열과 비슷하지만 크기가 동적으로 늘어나고, 자료형은 객체만 가능)
+			  2.순서없는 집합을 표현한 Set 형 (과자 봉투에 들어있는 객체를 연상하면 됨..중복된 데이터를 허용하지 않음..)
+			  3.key와 value의 쌍으로 데이터를 관리하는 Map형
+			*/
+			
+			out.print("<script>");
+			out.print("alert('인증 성공입니다');");
+			out.print("location.href='/board/list.jsp';");
+			out.print("</script>");
+		}else {
+			out.print("<script>");
+			//사용자가 없다면 -- 인증 실패
+			out.print("alert('인증 실패입니다');");
+			out.print("history.back();");
+			out.print("</script>");
+		}
+	}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
